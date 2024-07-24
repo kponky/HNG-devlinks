@@ -51,8 +51,8 @@ const LinksList = () => {
         </div>
       </div>
 
-      <div className="px-3 bg-[#FAFAFA]  rounded-xl mx-10">
-        <div className="flex items-center justify-between mt-6  px-5 ">
+      <div className="px-3 bg-[#FAFAFA]  rounded-xl mx-10 pt-3 mt-5 pb-4">
+        <div className="flex items-center justify-between mt-6  px-5  pb-3">
           <div className="flex items-center gap-2 text-[#737373] font-bold text-base">
             <FaEquals />
             <p>Link</p>
@@ -62,8 +62,8 @@ const LinksList = () => {
             <p className="text-[#737373] font-normal text-base">Remove</p>
           </div>
         </div>
-        <div className="px-5 ">
-          <label htmlFor="text">Platform</label>
+        <div className="px-5 mt-3">
+          <label htmlFor="text" className="my-3">Platform</label>
           <div className="flex gap-2  items-center border border-[#d9d9d9] rounded-lg  p-2 focus-within:border-indigo-400 focus-within:shadow-[0px_0px_32px_0px_#633CFF40]">
             <FaGithub />
             <p>GitHub</p>
@@ -75,8 +75,8 @@ const LinksList = () => {
             <FaChevronDown />
           </div>
         </div>
-        <div className="px-5 ">
-          <label htmlFor="text">Link</label>
+        <div className="px-5 mt-3">
+          <label htmlFor="text" className="my-3">Link</label>
           <div className="flex gap-2  items-center border border-[#d9d9d9] rounded-lg  p-2 focus-within:border-indigo-400 focus-within:shadow-[0px_0px_32px_0px_#633CFF40]">
             <FaLink />
             <p>https://www.github.com/benwright</p>
@@ -89,8 +89,8 @@ const LinksList = () => {
           </div>
         </div>
       </div>
-      <div className="px-3 bg-[#FAFAFA]  rounded-xl mx-10">
-        <div className="flex items-center justify-between mt-6  px-5 ">
+      <div className="px-3 bg-[#FAFAFA]  rounded-xl mx-10 pt-3  mt-3 pb-4">
+        <div className="flex items-center justify-between mt-6  px-5  pb-3">
           <div className="flex items-center gap-2 text-[#737373] font-bold text-base">
             <FaEquals />
             <p>Link</p>
@@ -101,7 +101,7 @@ const LinksList = () => {
           </div>
         </div>
         <div className="px-5 ">
-          <label htmlFor="text">Platform</label>
+          <label htmlFor="text" className="my-3">Platform</label>
           <div className="flex gap-2  items-center border border-[#d9d9d9] rounded-lg  p-2 focus-within:border-indigo-400 focus-within:shadow-[0px_0px_32px_0px_#633CFF40]">
             <FaGithub />
             <p>GitHub</p>
@@ -114,8 +114,8 @@ const LinksList = () => {
           </div>
         </div>
 
-        <div className="px-5 ">
-          <label htmlFor="text">Link</label>
+        <div className="px-5  my-3">
+          <label htmlFor="text" className="my-3">Link</label>
           <div className="flex gap-2  items-center border border-[#d9d9d9] rounded-lg  p-2 focus-within:border-indigo-400 focus-within:shadow-[0px_0px_32px_0px_#633CFF40]">
             <FaLink />
             <p>https://www.Youtube:com/benwright</p>
