@@ -1,4 +1,6 @@
 "use client";
+console.log('This will not cause an ESLint error');
+
 import React from "react";
 import Button from "./Button";
 import {
