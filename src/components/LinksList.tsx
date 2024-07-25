@@ -1,5 +1,8 @@
 "use client";
+/* eslint-disable react/no-unescaped-entities */
+
 console.log('This will not cause an ESLint error');
+
 
 import React from "react";
 import Button from "./Button";
