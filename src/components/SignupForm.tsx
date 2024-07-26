@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+
 import Link from "next/link";
 import React from "react";
 import { FaEnvelope, FaLock } from "react-icons/fa";
