@@ -10,7 +10,7 @@ const Home = () => {
       <div className="container mx-auto px-2 grid lg:grid-cols-5 grid-cols-1  gap-6 mt-6">
         <div className="col-span-2">phone mockup</div>
         <div className="lg:col-span-3  col-span-1">
-          <LinksList />
+         <LinksList/>
         </div>
       </div>
     </div>
