@@ -25,7 +25,7 @@ const LinksList = () => {
     updateLink,
     deleteLink,
     fetchLinks,
-    loading,
+    // loading,
     loadingSave,
   } = useLinkStore ();
   const [newLinks, setNewLinks] = useState<CreateLinkInput[]>([]);

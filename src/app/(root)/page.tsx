@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import Header from "@/components/Header";
 import LinksList from "@/components/LinksList";
 import React from "react";

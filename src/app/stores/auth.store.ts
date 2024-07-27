@@ -3,7 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
+  // onAuthStateChanged,
 } from "firebase/auth";
 // import { CreateUserInput, LoginUserInput } from "@/interfaces/auth.interface";
 import { FirebaseError } from "firebase/app";
@@ -20,6 +20,7 @@ interface IAuthStore {
   login: (input: LoginUserInput) => Promise<void>;
   logout: () => void;
 }
+
 
 const getFirebaseErrorMessage = (error: FirebaseError) => {
   switch (error.code) {
