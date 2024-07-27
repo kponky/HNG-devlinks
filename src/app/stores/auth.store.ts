@@ -3,9 +3,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  // onAuthStateChanged,
 } from "firebase/auth";
-// import { CreateUserInput, LoginUserInput } from "@/interfaces/auth.interface";
 import { FirebaseError } from "firebase/app";
 import { User } from "../Interfaces/user.interface";
 import { toast } from "sonner";

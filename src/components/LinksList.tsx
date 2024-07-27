@@ -25,11 +25,13 @@ const LinksList = () => {
     updateLink,
     deleteLink,
     fetchLinks,
-    // loading,
+    loading,
     loadingSave,
   } = useLinkStore ();
   const [newLinks, setNewLinks] = useState<CreateLinkInput[]>([]);
   const [editingLinks, setEditingLinks] = useState<UpdateLinkInput[]>([]);
+
+  console.log(loading)
 
   useEffect(() => {
     fetchLinks();
