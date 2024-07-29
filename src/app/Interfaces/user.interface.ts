@@ -1,7 +1,15 @@
+// export interface User {
+//   uid: string;
+//   profilePicture: string;
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+// }
+
+
 export interface User {
-  id: string;
-  profilePicture: string;
-  firstName: string;
-  lastName: string;
+  uid: string;
+  photoUrl?: string;
+  displayName: string;
   email: string;
 }

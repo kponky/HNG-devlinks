@@ -11,17 +11,19 @@
   "dependencies": {
     "firebase": "^10.12.4",
     "formik": "^2.4.6",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.416.0",
     "next": "14.2.5",
     "nextjs-toploader": "^1.6.12",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
-    "yup": "^1.4.0",
     "sonner": "^1.5.0",
+    "yup": "^1.4.0",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

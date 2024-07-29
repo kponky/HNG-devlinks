@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
 import Logo from "@/components/Logo";
+import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
+import { Providers } from "../providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +23,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex justify-center items-center flex-col min-h-screen bg-slate-100 font-instrument">
-          <Link href="/">
-         <Logo/>
-          </Link>
-          <div className="bg-white p-8 rounded-lg shadow-sm w-[500px] px-10 py-12">
-            {children}
-          </div>
-        </div>
+        <NextTopLoader
+          color="#633CFF"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={4}
+          showSpinner={true}
+          easing="ease"
+          speed={200}
+        />
+        <Toaster position="top-right" richColors theme="system" />
+        <Providers>
+          <Suspense fallback={<div> Loading...</div>}>
+            <div className="md:bg-gray-50 bg-white">
+              <div className="flex justify-center items-center flex-col min-h-screen bg-slate-100 font-instrument">
+                <Link href="/">
+                  <Logo />
+                </Link>
+                <div className="bg-white p-8 rounded-lg shadow-sm w-[500px] px-10 py-12">
+                  {children}
+                </div>
+              </div>
+            </div>
+          </Suspense>
+        </Providers>
       </body>
     </html>
   );
