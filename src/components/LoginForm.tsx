@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
 
-import { LoginUserInput } from "@/app/Interfaces/auth.interface";
+import { LoginUserInput } from "@/Interfaces/auth.interface";
 import { useAuthStore } from "@/app/stores/auth.store";
 import { useFormik } from "formik";
 import { useState } from "react";

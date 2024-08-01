@@ -1,6 +1,7 @@
 "use client";
-import { useAuthStore } from "@/app/stores/auth.store";
-import { useLinkStore } from "@/app/stores/link.store";
+
+import { Link } from "@/Interfaces/link.interface";
+import { User } from "firebase/auth";
 import Image from "next/image";
 import {
   FaArrowRight,
@@ -11,18 +12,30 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa6";
+import { toast } from "sonner";
 
-const PreviewComponent = () => {
-  const { links } = useLinkStore();
-  const { user, loading } = useAuthStore();
+const PreviewComponents: React.FC<{
+  links: Link[];
+  user: User;
+}> = ({ links, user }) => {
+  const copyLinkUrl = (link: Link) => {
+    navigator.clipboard
+      .writeText(link.url)
+      .then(() =>
+        toast.info(`${link.platform} copied to clipboard`, {
+          icon: renderIconByPlatform(link.platform),
+        })
+      )
+      .catch((err) => toast.error("Failed to copy link"));
+  };
 
   return (
-    <div>
+    <div className="w-[350px] mx-auto px-14 py-12 rounded-3xl shadow-lg">
       <div className="flex flex-col items-center mb-14">
         <div className="h-[120px] w-[120px] rounded-full mb-6 overflow-hidden border-4 ">
           <Image
-            src=""
-            alt=""
+            src={user?.photoURL || ""}
+            alt="profilePic"
             width={300}
             height={300}
             className="w-full h-full object-cover"
@@ -35,25 +48,26 @@ const PreviewComponent = () => {
       </div>
       <div className="space-y-4">
         {links.map((link) => (
-          <div
+          <button
             key={link.id}
             className={`relative p-3 px-4 rounded-lg w-full flex justify-between items-center text-white text-sm ${platformColor(
               link.platform
             )}`}
+            onClick={() => copyLinkUrl(link)}
           >
             <span className="flex gap-2 items-center">
               {renderIconByPlatform(link.platform)}
               <span>{link.platform}</span>
             </span>
             <FaArrowRight className="ml-2" size={13} />
-          </div>
+          </button>
         ))}
       </div>
     </div>
   );
 };
 
-export default PreviewComponent;
+export default PreviewComponents;
 
 const renderIconByPlatform = (platform: string) => {
   switch (platform) {

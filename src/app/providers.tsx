@@ -1,6 +1,7 @@
 "use client";
 
-import AuthGuard from "./guards/AuthGuard";
+import AuthGuard from "@/guards/AuthGuard";
+
 
 // import AuthGuard from "@/guards/AuthGuard";
 

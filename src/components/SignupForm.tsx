@@ -1,14 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { CreateUserInput } from "@/app/Interfaces/auth.interface";
-import { useAuthStore } from "@/app/stores/auth.store";
+import { CreateUserInput } from "@/Interfaces/auth.interface";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React, { useState } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import * as Yup from "yup";
 import Button from "./Button";
+import { useAuthStore } from "@/stores/auth.store";
 
 const SignupForm = () => {
   const { createUser, loading } = useAuthStore();

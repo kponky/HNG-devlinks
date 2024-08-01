@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { TOKEN_NAME } from "./stores/constants";
+import { TOKEN_NAME } from "./utils/constants";
 
 const authRoutes = ["/login", "/sign-up"];
 const privateRoutes = ["/?links", "/profile", "/preview"];

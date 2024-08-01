@@ -1,16 +1,22 @@
 "use client";
-import React from "react";
-import Logo from "@/components/Logo";
-import { FaEye, FaLink } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { BiUserCircle } from "react-icons/bi";
 import { usePathname } from "next/navigation";
+import Logo from "./Logo";
+import { useAuthStore } from "@/stores/auth.store";
+import { FaEye, FaLink } from "react-icons/fa6";
+import { BiUserCircle } from "react-icons/bi";
+import { LogOut } from "lucide-react";
 import Button from "./Button";
-import { useAuthStore } from "@/app/stores/auth.store";
 
 const Header = () => {
   const { user, logout } = useAuthStore();
   const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const isActive = (href: string) => {
     return (
@@ -26,11 +32,11 @@ const Header = () => {
         <Link href="/">
           <Logo />
         </Link>
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-4 items-center">
           <Link
-            href="/"
-            className={`flex gap-2 items-center px-[27px] py-[11px] rounded-lg text-[#737373] hover:text-primary transition-colors duration-300 ease-in-out ${
-              isActive("/") ? "bg-primary-200 text-primary" : ""
+            href="/editor"
+            className={`flex gap-2 items-center md:px-[27px] p-[11px] rounded-lg text-[#737373] hover:text-primary transition-colors duration-300 ease-in-out ${
+              isActive("/editor") ? "bg-primary-100 text-primary" : ""
             } `}
           >
             <FaLink size={18} />
@@ -38,25 +44,30 @@ const Header = () => {
           </Link>
           <Link
             href="/profile"
-            className={`flex gap-2 items-center px-[27px] py-[11px] rounded-lg text-[#737373] hover:text-primary transition-colors duration-300 ease-in-out ${
-              isActive("/profile") ? "bg-primary-200 text-primary" : ""
+            className={`flex gap-2 items-center md:px-[27px] p-[11px] rounded-lg text-[#737373] hover:text-primary transition-colors duration-300 ease-in-out ${
+              isActive("/profile") ? "bg-primary-100 text-primary" : ""
             } `}
           >
-            <BiUserCircle size={28} />
+            <BiUserCircle size={20} />
             <span className="hidden md:block">Profile Details</span>
           </Link>
         </div>
-        {user && (
-          <div className="md:flex hidden gap-2">
-            <p>{user?.email}</p>
-            <button onClick={logout} className="text-red-500">
-              Logout
-            </button>
-          </div>
-        )}
-        <div>
-          <Link href="/preview">
-            <Button
+
+        <div className="flex items-center gap-4">
+          {isLoading ? (
+            <div className="size-11 rounded-lg bg-gray-300 animate-pulse"></div>
+          ) : (
+            user && (
+              <div className="">
+                <button onClick={logout} className="text-red-500 p-[11px]">
+                  <LogOut size={20} />
+                </button>
+              </div>
+            )
+          )}
+
+          <Link href={`/preview/${user?.uid}`}>
+            <Button 
               variant="outline"
               className="flex gap-2 items-center px-[11px] md:px-[27px]"
             >

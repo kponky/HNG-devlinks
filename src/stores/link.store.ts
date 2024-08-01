@@ -1,50 +1,61 @@
-//
 
 import { create } from "zustand";
 import {
-  CreateLinkInput,
-  Link,
-  UpdateLinkInput,
-} from "../Interfaces/link.interface";
-import {
-  addDoc,
   collection,
-  deleteDoc,
-  doc,
+  addDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 import { toast } from "sonner";
-import { db } from "@/lib/firebaseConfig";
+import { CreateLinkInput, Link, UpdateLinkInput } from "@/Interfaces/link.interface";
+import { auth, db } from "@/lib/firebaseConfig";
 
 interface ILinkStore {
   loading: boolean;
   loadingSave: boolean;
   links: Link[];
+  userInfo: any | null;
   setLinks: (links: Link[]) => void;
+  setUserInfo: (info: any) => void;
   addLink: (input: CreateLinkInput) => Promise<void>;
   updateLink: (input: UpdateLinkInput) => Promise<void>;
   deleteLink: (id: string) => Promise<void>;
   fetchLinks: () => Promise<void>;
+  
 }
 
 export const useLinkStore = create<ILinkStore>((set) => ({
   loading: false,
   loadingSave: false,
   links: [],
+  userInfo: null,
   setLinks: (links: Link[]) => set({ links }),
+  setUserInfo: (info: any) => set({ userInfo: info }),
   addLink: async (input) => {
     try {
       set({ loadingSave: true });
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("User is not authenticated");
+        return;
+      }
+
       const { platform, url } = input;
-      const newLink = { platform, url };
-      const docRef = await addDoc(collection(db, "links"), newLink);
+      const newLink = { platform, url, author: user.uid };
+      const userLinksRef = collection(db, "users", user.uid, "links");
+      const docRef = await addDoc(userLinksRef, newLink);
+
       set((state) => ({
         links: [...state.links, { id: docRef.id, ...newLink }],
       }));
       toast.success("Link added");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to add link");
     } finally {
       set({ loadingSave: false });
     }
@@ -52,10 +63,18 @@ export const useLinkStore = create<ILinkStore>((set) => ({
   updateLink: async (input) => {
     try {
       set({ loadingSave: true });
-      const linkDoc = doc(db, "links", input.id);
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("User is not authenticated");
+        return;
+      }
+
+      const linkDoc = doc(db, "users", user.uid, "links", input.id);
       const { platform, url } = input;
       const updatedLink = { platform, url };
       await updateDoc(linkDoc, updatedLink);
+
       set((state) => ({
         links: state.links.map((link) =>
           link.id === input.id ? { ...link, ...updatedLink } : link
@@ -64,6 +83,7 @@ export const useLinkStore = create<ILinkStore>((set) => ({
       toast.success("Link updated");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to update link");
     } finally {
       set({ loadingSave: false });
     }
@@ -71,14 +91,23 @@ export const useLinkStore = create<ILinkStore>((set) => ({
   deleteLink: async (id) => {
     try {
       set({ loading: true });
-      const linkDoc = doc(db, "links", id);
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("User is not authenticated");
+        return;
+      }
+
+      const linkDoc = doc(db, "users", user.uid, "links", id);
       await deleteDoc(linkDoc);
+
       set((state) => ({
         links: state.links.filter((link) => link.id !== id),
       }));
       toast.success("Link removed");
     } catch (error) {
       console.log(error);
+      toast.error("Failed to remove link");
     } finally {
       set({ loading: false });
     }
@@ -86,7 +115,15 @@ export const useLinkStore = create<ILinkStore>((set) => ({
   fetchLinks: async () => {
     try {
       set({ loading: true });
-      const snapshot = await getDocs(collection(db, "links"));
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("User is not authenticated");
+        return;
+      }
+
+      const userLinksRef = collection(db, "users", user.uid, "links");
+      const snapshot = await getDocs(userLinksRef);
       const links = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -98,4 +135,5 @@ export const useLinkStore = create<ILinkStore>((set) => ({
       set({ loading: false });
     }
   },
+  
 }));

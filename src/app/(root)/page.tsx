@@ -19,15 +19,19 @@
 // export default Home;
 
 
-import React from 'react'
-import LinkList from './components/LinksList'
+import Button from "@/components/Button";
+import Link from "next/link";
 
 const Home = () => {
   return (
     <div className="w-full">
-      <LinkList/>
+      <div className="container mx-auto px-2">
+        <Link href="/editor">
+          <Button>Customize your links</Button>
+        </Link>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
