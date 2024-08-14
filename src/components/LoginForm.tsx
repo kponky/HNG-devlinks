@@ -2,13 +2,13 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import { LoginUserInput } from "@/Interfaces/auth.interface";
-import { useAuthStore } from "@/app/stores/auth.store";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import * as Yup from "yup";
 import Button from "./Button";
 import Link from "next/link";
+import { useAuthStore } from "@/stores/auth.store";
 
 const LoginForm = () => {
   const { login, loading } = useAuthStore();
